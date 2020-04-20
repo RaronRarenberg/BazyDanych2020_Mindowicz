@@ -1,4 +1,4 @@
-# BazyDanych2020_Mindowicz
+# BazyDanych2020_Krzysztof_Mindowicz
 Aplikacja w języku PHP do komunikacji z bazą danych w MySQL.
 Będzie to baza danych dla floty samochodów należącej do pewnej firmy, wszystkie dane będą zmyślone, ale realistyczne.
 Jeśli chodzi o IDE to jeszcze podejmę tą decyzję.
