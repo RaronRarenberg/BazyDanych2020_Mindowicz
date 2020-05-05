@@ -1,5 +1,5 @@
 -- Bez tej linijki pokazywal sie blad powtarzania sie klucza przy uzyciu polecenia source na istniejacej juz bazie
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
 
 -- Struktura tabeli `samochod`
 DROP TABLE IF EXISTS `samochod`;
@@ -39,13 +39,13 @@ CREATE TABLE `wyposazenie` (
 
 -- Dane dla tabeli `wyposazenie`
 LOCK TABLES `wyposazenie` WRITE;
-/*!40000 ALTER TABLE `samochod` DISABLE KEYS */;
+/*!40000 ALTER TABLE `wyposazenie` DISABLE KEYS */;
 INSERT INTO `wyposazenie` VALUES('Nadajnik GPS','TAK','WF0RXXGCDR8G10516'),
 ('Nadajnik GPS','NIE','VSSZZZ5FZGR131860'),
 ('Nadajnik GPS','TAK','WVWZZZ1KZCW256847'),
 ('Nadajnik GPS','TAK','TMBJJ7NE5G0164515'),
 ('Nadajnik GPS','TAK','WF0FXXWPCFFY71839');
-/*!40000 ALTER TABLE `samochod` ENABLE KEYS */;
+/*!40000 ALTER TABLE `wyposazenie` ENABLE KEYS */;
 UNLOCK TABLES;
 
 -- Struktura tabeli `dowod_rejestr`
@@ -60,13 +60,13 @@ CREATE TABLE `dowod_rejestr` (
 
 -- Dane dla tabeli `dowod_rejestr`
 LOCK TABLES `dowod_rejestr` WRITE;
-/*!40000 ALTER TABLE `samochod` DISABLE KEYS */;
+/*!40000 ALTER TABLE `dowod_rejestr` DISABLE KEYS */;
 INSERT INTO `dowod_rejestr` VALUES('2020-05-21','DW213ZX','WF0RXXGCDR8G10516'),
 ('2021-03-17','DW246NJ','VSSZZZ5FZGR131860'),
 ('2022-02-01','GD65UWR','WVWZZZ1KZCW256847'),
 ('2020-08-12','GD420DQ','TMBJJ7NE5G0164515'),
 ('2023-09-09','DW912RV','WF0FXXWPCFFY71839');
-/*!40000 ALTER TABLE `samochod` ENABLE KEYS */;
+/*!40000 ALTER TABLE `dowod_rejestr` ENABLE KEYS */;
 UNLOCK TABLES;
 
 -- Struktura tabeli `polisa_oc`
@@ -81,13 +81,13 @@ CREATE TABLE `polisa_oc` (
 
 -- Dane dla tabeli `polisa_oc`
 LOCK TABLES `polisa_oc` WRITE;
-/*!40000 ALTER TABLE `samochod` DISABLE KEYS */;
+/*!40000 ALTER TABLE `polisa_oc` DISABLE KEYS */;
 INSERT INTO `polisa_oc` VALUES('2020-05-21','AXA','WF0RXXGCDR8G10516'),
 ('2021-03-17','Aviva','VSSZZZ5FZGR131860'),
 ('2022-02-01','UNIQA','WVWZZZ1KZCW256847'),
 ('2020-08-12','LINK4','TMBJJ7NE5G0164515'),
 ('2023-09-09','Allianz','WF0FXXWPCFFY71839');
-/*!40000 ALTER TABLE `samochod` ENABLE KEYS */;
+/*!40000 ALTER TABLE `polisa_oc` ENABLE KEYS */;
 UNLOCK TABLES;
 
 -- Struktura tabeli `pracownik`
@@ -99,17 +99,17 @@ CREATE TABLE `pracownik` (
   `e_mail` varchar(40),
   `zatrudnienie` varchar(15),
   PRIMARY KEY (`e_mail`)
-  ) DEFAULT CHARSET=utf8;
+) DEFAULT CHARSET=utf8;
   
 -- Dane dla tabeli `pracownik`
 LOCK TABLES `pracownik` WRITE;
-/*!40000 ALTER TABLE `samochod` DISABLE KEYS */;
+/*!40000 ALTER TABLE `pracownik` DISABLE KEYS */;
 INSERT INTO `pracownik` VALUES('Jan','Kowalski','342932293','jan.kowalski@firma.pl','Umowa o Prace'),
 ('Jan','Nowak','484619416','jan.nowak@firma.pl','Umowa o Prace'),
 ('Zdzisław','Duda','174285963','zdzislaw.duda@firma.pl','Umowa o Prace'),
 ('Sobiesław','Zasada','753951456','sobieslaw.zasada@firma.pl','B2B'),
 ('Wiesław','Wiertar','369258147','wieslaw.wiertar@firma.pl','B2B');
-/*!40000 ALTER TABLE `samochod` ENABLE KEYS */;
+/*!40000 ALTER TABLE `pracownik` ENABLE KEYS */;
 UNLOCK TABLES;
   
   -- Struktura tabeli `pobiera`
@@ -127,12 +127,14 @@ CREATE TABLE `pobiera` (
 
 -- Dane dla tabeli `pobiera`
 LOCK TABLES `pobiera` WRITE;
+/*!40000 ALTER TABLE `pobiera` DISABLE KEYS */;
 INSERT INTO `pobiera` VALUES('2020-04-28','2020-05-04','WF0RXXGCDR8G10516','jan.kowalski@firma.pl'),
 ('2020-04-24','2020-05-05','VSSZZZ5FZGR131860','jan.nowak@firma.pl'),
 ('2020-02-14','2020-02-17','WVWZZZ1KZCW256847','zdzislaw.duda@firma.pl'),
 ('2020-02-20','2020-03-01','TMBJJ7NE5G0164515','sobieslaw.zasada@firma.pl'),
 ('2020-04-28',NULL,'WF0FXXWPCFFY71839','wieslaw.wiertar@firma.pl'); -- Tutaj NULL po prostu oznacza, ze samochod nie zostal oddany
+/*!40000 ALTER TABLE `pobiera` ENABLE KEYS */;
 UNLOCK TABLES;
 
 -- Przywracamy sprawdzanie kluczy
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
