@@ -87,7 +87,7 @@ if(isset($_POST['edytuj']))
 	$karta_pojazdu = mysqli_real_escape_string($link,$_POST['karta_pojazdu']);
 	
 	$link->query("UPDATE samochod SET marka='$marka',model='$model',vin='$vin',forma_wlasnosci='$forma_wlasnosci',osob_dost='$osob_dost',rok_prod='$rok_prod',gasnica='$gasnica',apteczka_data='$apteczka_data',karta_pojazdu='$karta_pojazdu' WHERE vin='$vin'") or 
-	die(mysql_error());
+	die($link->error);
 	
 	//$_SESSION['message'] = "Wprowadzono zmiany";
 	//$_SESSION['msg_type'] = "warning";
