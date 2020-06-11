@@ -8,10 +8,10 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 		
-		<title>FLOTA SAMOCHODÓW - PRACOWNICY</title>
+		<title>FLOTA SAMOCHODÓW - SAMOCHODY</title>
 		</head>
 	<body>
-		<?php require_once 'pracownicy-przetwarzanie.php';?>
+		<?php require_once 'samochody-przetwarzanie.php';?>
 		
 		<?php
 		if(isset($_SESSION['messsage'])): 
@@ -26,38 +26,62 @@
 		<?php endif ?>
 		<a href="index.php" class="btn btn-primary">POWRÓT</a>
 		<div class="row justify-content-center">
-		<form action="pracownicy-przetwarzanie.php" method="POST">
+		<form action="samochody-przetwarzanie.php" method="POST">
 		
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
 		
 			<div class="form-group">
-			<label>Imię</label>
-			<input type="text" name="imie" class="form-control" 
-				   value="<?php echo $imie; ?>" placeholder="Wprowadz imie">
+			<label>Marka</label>
+			<input type="text" name="marka" class="form-control" 
+				   value="<?php echo $marka; ?>" placeholder="Wprowadź markę">
 			</div>
 			
 			<div class="form-group">
-			<label>Nazwisko</label>
-			<input type="text" name="nazwisko" class="form-control" 
-				   value="<?php echo $nazwisko; ?>" placeholder="Wprowadz nazwisko">
+			<label>Model</label>
+			<input type="text" name="model" class="form-control" 
+				   value="<?php echo $model; ?>" placeholder="Wprowadź model">
 			</div>
 			
 			<div class="form-group">
-			<label>Numer telefonu</label>
-			<input type="text" name="numer" class="form-control" 
-				   value="<?php echo $numer; ?>" placeholder="Wprowadz numer telefonu">
+			<label>VIN</label>
+			<input type="text" name="vin" class="form-control" 
+				   value="<?php echo $vin; ?>" placeholder="Wprowadź VIN">
 			</div>
 			
 			<div class="form-group">
-			<label>E-mail</label>
-			<input type="text" name="email" class="form-control" 
-				   value="<?php echo $email; ?>" placeholder="Wprowadz e-mail">
+			<label>Forma własności</label>
+			<input type="text" name="forma_wlasnosci" class="form-control" 
+				   value="<?php echo $forma_wlasnosci; ?>" placeholder="Wprowadź formę własności">
 			</div>
 			
 			<div class="form-group">
-			<label>Zatrudnienie</label>
-			<input type="text" name="zatrudnienie" class="form-control" 
-				   value="<?php echo $zatrudnienie; ?>" placeholder="Wprowadz forme zatrudnienia">
+			<label>Osobowy/Dostawczy</label>
+			<input type="text" name="osob_dost" class="form-control" 
+				   value="<?php echo $osob_dost; ?>" placeholder="Wprowadź Dostawczy lub Osobowy">
+			</div>
+			
+			<div class="form-group">
+			<label>Rok produkcji</label>
+			<input type="text" name="rok_prod" class="form-control" 
+				   value="<?php echo $rok_prod; ?>" placeholder="Wprowadź rok produkcji">
+			</div>
+			
+			<div class="form-group">
+			<label>Gaśnica</label>
+			<input type="text" name="gasnica" class="form-control" 
+				   value="<?php echo $gasnica; ?>" placeholder="TAK lub zostaw puste pole">
+			</div>
+			
+			<div class="form-group">
+			<label>Data ważności apteczki</label>
+			<input type="text" name="apteczka_data" class="form-control" 
+				   value="<?php echo $apteczka_data; ?>" placeholder="Data w formacie RRRR-MM-DD">
+			</div>
+			
+			<div class="form-group">
+			<label>Karta pojazdu</label>
+			<input type="text" name="karta_pojazdu" class="form-control" 
+				   value="<?php echo $karta_pojazdu; ?>" placeholder="TAK lub zostaw puste pole">
 			</div>
 			
 			<div class="form-group">
@@ -87,18 +111,22 @@
 			$link->query("SET CHARACTER SET utf8");  
 			$link->query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 			
-			$tabela = $link->query("SELECT * from pracownik") or die($link->error);
+			$tabela = $link->query("SELECT * from samochod") or die($link->error);
 			
 		?>
 		<div class="row justify-content-center">
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th>Numer Telefonu</th>
-						<th>E-mail</th>
-						<th>Zatrudnienie</th>
+						<th>Marka</th>
+						<th>Model</th>
+						<th>VIN</th>
+						<th>Forma własności</th>
+						<th>Osobowy/Dostawczy</th>
+						<th>Rok produkcji</th>
+						<th>Gaśnica</th>
+						<th>Data ważności apteczki</th>
+						<th>Karta pojazdu</th>
 						<th colspan="2">Akcja</th><!--to dla przyciskow edytuj oraz usun-->
 					</tr>
 				</thead>
@@ -106,15 +134,19 @@
 					while($rzad = $tabela->fetch_assoc()):
 				?>
 				<tr>
-					<td><?php echo $rzad['imie']; ?></td>
-					<td><?php echo $rzad['nazwisko']; ?></td>
-					<td><?php echo $rzad['numer_tel']; ?></td>
-					<td><?php echo $rzad['e_mail']; ?></td>
-					<td><?php echo $rzad['zatrudnienie']; ?></td>
+					<td><?php echo $rzad['marka']; ?></td>
+					<td><?php echo $rzad['model']; ?></td>
+					<td><?php echo $rzad['vin']; ?></td>
+					<td><?php echo $rzad['forma_wlasnosci']; ?></td>
+					<td><?php echo $rzad['osob_dost']; ?></td>
+					<td><?php echo $rzad['rok_prod']; ?></td>
+					<td><?php echo $rzad['gasnica']; ?></td>
+					<td><?php echo $rzad['apteczka_data']; ?></td>
+					<td><?php echo $rzad['karta_pojazdu']; ?></td>
 					<td>
-						<a href="pracownicy.php?edit=<?php echo $rzad['e_mail']; ?>"
+						<a href="samochody.php?edit=<?php echo $rzad['vin']; ?>"
 						   class="btn btn-info">Edytuj</a>
-						<a href="pracownicy.php?delete=<?php echo $rzad['e_mail']; ?>"
+						<a href="samochody.php?delete=<?php echo $rzad['vin']; ?>"
 						   class="btn btn-danger">Skasuj</a>   
 					</td>
 				</tr>

@@ -8,10 +8,10 @@
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
 		
-		<title>FLOTA SAMOCHODÓW - PRACOWNICY</title>
+		<title>FLOTA SAMOCHODÓW - DOWODY REJESTRACYJNE</title>
 		</head>
 	<body>
-		<?php require_once 'pracownicy-przetwarzanie.php';?>
+		<?php require_once 'dowod_rejestr-przetwarzanie.php';?>
 		
 		<?php
 		if(isset($_SESSION['messsage'])): 
@@ -26,39 +26,28 @@
 		<?php endif ?>
 		<a href="index.php" class="btn btn-primary">POWRÓT</a>
 		<div class="row justify-content-center">
-		<form action="pracownicy-przetwarzanie.php" method="POST">
+		<form action="dowod_rejestr-przetwarzanie.php" method="POST">
 		
 			<input type="hidden" name="id" value="<?php echo $id; ?>">
 		
 			<div class="form-group">
-			<label>Imię</label>
-			<input type="text" name="imie" class="form-control" 
-				   value="<?php echo $imie; ?>" placeholder="Wprowadz imie">
+			<label>Data ważności przeglądu</label>
+			<input type="text" name="przeglad_waznosc" class="form-control" 
+				   value="<?php echo $przeglad_waznosc; ?>" placeholder="RRRR-MM-DD">
 			</div>
 			
 			<div class="form-group">
-			<label>Nazwisko</label>
-			<input type="text" name="nazwisko" class="form-control" 
-				   value="<?php echo $nazwisko; ?>" placeholder="Wprowadz nazwisko">
+			<label>Numer rejestracyjny pojazdu</label>
+			<input type="text" name="numer_rejestr" class="form-control" 
+				   value="<?php echo $numer_rejestr; ?>" placeholder="Wprowadź numer rejestracyjny pojazdu">
 			</div>
 			
 			<div class="form-group">
-			<label>Numer telefonu</label>
-			<input type="text" name="numer" class="form-control" 
-				   value="<?php echo $numer; ?>" placeholder="Wprowadz numer telefonu">
+			<label>VIN</label>
+			<input type="text" name="auto_vin" class="form-control" 
+				   value="<?php echo $auto_vin; ?>" placeholder="Wprowadź VIN pojazdu">
 			</div>
 			
-			<div class="form-group">
-			<label>E-mail</label>
-			<input type="text" name="email" class="form-control" 
-				   value="<?php echo $email; ?>" placeholder="Wprowadz e-mail">
-			</div>
-			
-			<div class="form-group">
-			<label>Zatrudnienie</label>
-			<input type="text" name="zatrudnienie" class="form-control" 
-				   value="<?php echo $zatrudnienie; ?>" placeholder="Wprowadz forme zatrudnienia">
-			</div>
 			
 			<div class="form-group">
 			<?php 
@@ -79,7 +68,7 @@
 		
 		
 		<div class="container">
-		<?php //wyswietlanie tabeli pracownikow
+		<?php //wyswietlanie tabeli pobran
 			ini_set('display_errors', 1);
 			$link = new mysqli("localhost", "kmindowicz", "xeefae7Ohth7", "kmindowicz_projekt") or 
 			die(mysqli_error($link));
@@ -87,18 +76,17 @@
 			$link->query("SET CHARACTER SET utf8");  
 			$link->query("SET SESSION collation_connection = 'utf8_unicode_ci'");
 			
-			$tabela = $link->query("SELECT * from pracownik") or die($link->error);
+			$tabela = $link->query("SELECT * from dowod_rejestr") or die($link->error);
 			
 		?>
 		<div class="row justify-content-center">
 			<table class="table">
 				<thead>
 					<tr>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th>Numer Telefonu</th>
-						<th>E-mail</th>
-						<th>Zatrudnienie</th>
+						
+						<th>Data ważności  przeglądu</th>
+						<th>Numer rejestracyjny pojazdu</th>
+						<th>VIN</th>
 						<th colspan="2">Akcja</th><!--to dla przyciskow edytuj oraz usun-->
 					</tr>
 				</thead>
@@ -106,15 +94,14 @@
 					while($rzad = $tabela->fetch_assoc()):
 				?>
 				<tr>
-					<td><?php echo $rzad['imie']; ?></td>
-					<td><?php echo $rzad['nazwisko']; ?></td>
-					<td><?php echo $rzad['numer_tel']; ?></td>
-					<td><?php echo $rzad['e_mail']; ?></td>
-					<td><?php echo $rzad['zatrudnienie']; ?></td>
+					
+					<td><?php echo $rzad['przeglad_waznosc']; ?></td>
+					<td><?php echo $rzad['numer_rejestr']; ?></td>
+					<td><?php echo $rzad['auto_vin']; ?></td>
 					<td>
-						<a href="pracownicy.php?edit=<?php echo $rzad['e_mail']; ?>"
+						<a href="dowod_rejestr.php?edit=<?php echo $rzad['id_dowodu']; ?>"
 						   class="btn btn-info">Edytuj</a>
-						<a href="pracownicy.php?delete=<?php echo $rzad['e_mail']; ?>"
+						<a href="dowod_rejestr.php?delete=<?php echo $rzad['id_dowodu']; ?>"
 						   class="btn btn-danger">Skasuj</a>   
 					</td>
 				</tr>
